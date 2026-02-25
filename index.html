@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IDC-NG | InjectLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+    }
+
+    .lang-select {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      background: white;
+      cursor: pointer;
+    }
+
+    @media (max-width:768px) {
+      .nav-menu {
+        gap: 16px;
+        font-size: 13px;
+      }
+    }
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --light: #f1f5f9;
+      --border: #e2e8f0;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 0 24px;
+    }
+
+    header {
+      padding: 90px 0 60px 0;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 64px;
+      font-weight: 600;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+
+    header p.subtitle {
+      font-size: 22px;
+      color: var(--muted);
+      margin-bottom: 24px;
+      font-weight: 400;
+    }
+
+    header p.description {
+      max-width: 650px;
+      margin: auto;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .buttons {
+      margin-top: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 30px;
+      margin: 8px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 15px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.85;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: var(--light);
+    }
+
+    section {
+      padding: 50px 0;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 500;
+      margin-bottom: 40px;
+      letter-spacing: -0.5px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 40px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .card {
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 16px;
+      font-weight: 500;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .architecture {
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .flow {
+      margin-top: 30px;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .flow strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-image {
+      max-width: 800px;
+      width: 80%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .product-section {
+      position: relative;
+      text-align: center;
+    }
+
+    .product-wrapper {
+      position: relative;
+      display: block;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .product-wrapper .hero-image {
+      margin: 0;
+      width: 100%;
+    }
+
+    .feature-label {
+      position: absolute;
+      max-width: 260px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .feature-label h4 {
+      font-size: 16px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .feature-label p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .feature-right-1 { top: 15%; right: -300px; }
+    .feature-right-2 { top: 45%; right: -300px; }
+    .feature-right-3 { top: 70%; right: -300px; }
+
+    .feature-left-1 { top: 25%; left: -300px; text-align: right; }
+    .feature-left-2 { top: 60%; left: -300px; text-align: right; }
+
+    .feature-label::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40px;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .feature-right-1::before,
+    .feature-right-2::before,
+    .feature-right-3::before {
+      left: -50px;
+    }
+
+    .feature-left-1::before,
+    .feature-left-2::before {
+      right: -50px;
+    }
+
+    @media (max-width:1200px) {
+      .feature-1, .feature-2, .feature-3 {
+        position: static;
+        margin-top: 20px;
+        text-align: center;
+      }
+      .product-wrapper {
+        display: block;
+      }
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 42px; }
+      .section-title { font-size: 28px; }
+      section { padding: 70px 0; }
+    }
+  </style>
+
+</head>
+  <body>
+
+  <div class="navbar">
+    <div class="nav-container">
+      <div class="logo">InjectLink</div>
+      <div class="nav-menu">
+        <a href="index.html">Product</a>
+        <a href="#">Features</a>
+        <a href="#">Supported injectors</a>
+        <a href="contact.html">Contact</a>
+        <select class="lang-select">
+          <option>EN</option>
+          <option>FR</option>
+          <option>DE</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <header class="container">
+    <h1>IDC-NG</h1>
+    <p class="subtitle">Contrast Injector Communication Module</p>
+    <img src="produit3.png" alt="IDC-NG product view" class="hero-image" style="margin:15px auto 15px auto;width: 50%;">
+    <div class="buttons">
+      <a href="contact.html" class="btn btn-primary">Request information</a>
+      <a href="#" class="btn btn-secondary">Documentation</a>
+    </div>
+    <br>
+    <p class="description">
+      IDC-NG connects injection systems to hospital DICOM infrastructure.
+      It captures injection data over CANopen and securely publishes
+      structured reports to PACS, while enabling patient association
+      via DICOM Worklist through an intuitive web interface.
+    </p>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2 class="section-title">Designed for Modern Radiology</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <h3>CANopen CiA-425 Native</h3>
+          <p>Real-time acquisition of injection parameters using CiA-425 compliant CANopen communication.</p>
+        </div>
+        <div class="card">
+          <h3>DICOM Structured Reports</h3>
+          <p>Automatic generation and transmission of injection reports via C-STORE.</p>
+        </div>
+        <div class="card">
+          <h3>Worklist Integration</h3>
+          <p>Retrieve Modality Worklist and associate patients directly from the embedded web interface.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container architecture">
+      <h2 class="section-title">Simple. Secure. Interoperable.</h2>
+      <p style="color:var(--muted); font-size:18px;">
+        IDC-NG acts as a seamless bridge between injector devices and hospital IT systems.
+      </p>
+      <div class="flow">
+        <div class="diagram-wrapper">
+          <div class="node">Injector<br><span>CANopen</span></div>
+          <div class="line">
+            <div class="pulse"></div>
+          </div>
+          <div class="node highlight">IDC-NG</div>
+          <div class="line">
+            <div class="pulse"></div>
+          </div>
+          <div class="node">PACS / RIS<br><span>DICOM</span></div>
+        </div>
+      </div>
+
+      <style>
+        .diagram-wrapper {
+          margin-top:40px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          flex-wrap:nowrap;
+          gap:0;
+          width:100%;
+        }
+
+        .node {
+          padding:18px 28px;
+          border:1px solid var(--border);
+          border-radius:14px;
+          font-weight:500;
+          background:white;
+          min-width:160px;
+        }
+
+        .node span {
+          display:block;
+          font-size:13px;
+          color:var(--muted);
+          margin-top:4px;
+          font-weight:400;
+        }
+
+        .highlight {
+          background:var(--text);
+          color:white;
+          border-color:var(--text);
+        }
+
+        .highlight span { color:#cbd5e1; }
+
+        .line {
+          position:relative;
+          width:120px;
+          height:2px;
+          background:var(--border);
+          overflow:hidden;
+          flex-shrink:0;
+        }
+
+        .pulse {
+          position:absolute;
+          top:0;
+          left:-20px;
+          width:20px;
+          height:2px;
+          background:var(--text);
+          animation: flow 2s linear infinite;
+        }
+
+        @keyframes flow {
+          0% { left:-20px; }
+          100% { left:100%; }
+        }
+
+        @media (max-width:768px) {
+          .diagram-wrapper {
+            flex-direction:column;
+            gap:20px;
+          }
+          .line {
+            width:2px;
+            height:60px;
+          }
+          .pulse {
+            width:2px;
+            height:20px;
+            top:-20px;
+            left:0;
+            animation: flow-vertical 2s linear infinite;
+          }
+          @keyframes flow-vertical {
+            0% { top:-20px; }
+            100% { top:100%; }
+          }
+        }
+        }
+      </style>
+    </div>
+  </section>
+
+  <section class="product-section">
+    <div class="container">
+      <h2 class="section-title">Product Architecture</h2>
+      <div class="product-wrapper">
+        <img src="pcb3D2.png" alt="IDC-NG communication module" class="hero-image">
+
+        <div class="feature-label feature-right-1">
+          <h4>Injector interface</h4>
+          <p>Supports standard (CiA-425) and vendors-specific interfaces (RS422/CAN)</p>
+        </div>
+
+        <div class="feature-label feature-right-2">
+          <h4>Embedded DICOM Engine</h4>
+          <p>Integrated C‑STORE and Worklist client for seamless PACS integration.</p>
+        </div>
+
+        <div class="feature-label feature-right-3">
+          <h4>Connectivity</h4>
+          <p>Ethernet and Wi-Fi for clinical environments context. Secure USB-C for maintenance.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container" style="text-align:center;">
+      <h2 class="section-title">InjectLink</h2>
+      <p style="color:var(--muted); max-width:600px; margin:auto; font-size:17px;">
+        InjectLink builds advanced communication modules for medical injection systems.
+        We focus on interoperability, regulatory-grade reliability, and elegant workflow design.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 InjectLink
+  </footer>
+
+</body>
+</html>

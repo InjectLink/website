@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | InjectLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-weight: 600;
+      font-size: 18px;
+      letter-spacing: -0.3px;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .nav-menu a {
+      text-decoration: none;
+      color: var(--text);
+      opacity: 0.8;
+      transition: opacity 0.2s ease;
+    }
+
+    .nav-menu a:hover {
+      opacity: 1;
+    }
+
+    .lang-select {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 6px 14px;
+      font-size: 13px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 100px 24px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 48px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    p {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .email {
+      font-size: 22px;
+      font-weight: 500;
+      margin-top: 20px;
+    }
+
+    .email a {
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 40px 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 36px;
+      }
+      .container {
+        padding: 70px 24px;
+      }
+    }
+  </style>
+  <script>
+    (function() {
+      const currentLang = document.documentElement.getAttribute('data-lang');
+      const browserLang = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+
+      function detectLang() {
+        if (browserLang.startsWith('fr')) return 'fr';
+        if (browserLang.startsWith('de')) return 'de';
+        return 'en';
+      }
+
+      const preferredLang = localStorage.getItem('injectlink_lang') || detectLang();
+
+      if (preferredLang !== currentLang) {
+        // Redirect to language folder structure
+        window.location.href = '/' + preferredLang + '/contact.html';
+      }
+    })();
+  </script>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="nav-container">
+      <div class="logo">InjectLink</div>
+      <div class="nav-menu">
+        <a href="index.html">Product</a>
+        <a href="#">Technology</a>
+        <a href="#">Security</a>
+        <a href="contact.html">Contact</a>
+        <select class="lang-select">
+          <option>EN</option>
+          <option>FR</option>
+          <option>DE</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h1>Contact InjectLink</h1>
+    <p>
+      We support healthcare manufacturers, radiology departments and OEM partners
+      integrating IDC‑NG into clinical environments.
+    </p>
+
+    <div style="margin-top:50px; display:flex; flex-direction:column; gap:40px;">
+
+      <div style="padding:30px; border:1px solid var(--border); border-radius:16px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:10px;">Sales & Partnerships</h2>
+        <p style="margin-bottom:10px;">
+          For product information, OEM integration or commercial inquiries:
+        </p>
+        <div class="email">
+          <a href="mailto:sales@injectlink.com">
+            sales@injectlink.com
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:30px; border:1px solid var(--border); border-radius:16px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:10px;">Technical Support</h2>
+        <p style="margin-bottom:10px;">
+          For integration assistance, DICOM connectivity or CANopen implementation support:
+        </p>
+        <div class="email">
+          <a href="mailto:support@injectlink.com">
+            support@injectlink.com
+          </a>
+        </div>
+      </div>
+
+      <div style="padding:30px; border:1px solid var(--border); border-radius:16px;">
+        <h2 style="font-size:20px; font-weight:600; margin-bottom:10px;">Company</h2>
+        <p style="margin-bottom:10px;">
+          InjectLink develops communication modules for medical injection systems,
+          focusing on interoperability, cybersecurity and regulatory‑grade reliability.
+        </p>
+        <div class="email">
+          <a href="mailto:contact@injectlink.com">
+            contact@injectlink.com
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    © 2026 InjectLink
+  </footer>
+
+</body>
+</html>
